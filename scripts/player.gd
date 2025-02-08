@@ -61,7 +61,7 @@ func add_score(amount: int):
 func update_size():
 	if score >= 200 and not size_increase_two:
 		size_increase_two = true
-		start_size_increase(2, 900)
+		start_size_increase(2, 700)
 	elif score >= 50 and not size_increase_one:
 		size_increase_one = true
 		start_size_increase(1.5, 500)

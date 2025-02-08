@@ -19,9 +19,9 @@ func _process(delta):
 
 func _on_player_size_changed(size_one, size_two):
 	if size_one == true and not size_two == true:
-		zoomTarget *= 0.6
+		zoomTarget *= 0.8
 	elif size_two == true:
-		zoomTarget *= 0.6
+		zoomTarget *= 0.8
 		
 func Zoom(delta): #debug function
 	if Input.is_action_just_pressed("zoom_in"):

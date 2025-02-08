@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhukbw0m5ksmx"]
+[gd_scene load_steps=9 format=3 uid="uid://bhukbw0m5ksmx"]
 
 [ext_resource type="PackedScene" uid="uid://c124q4akqos1w" path="res://scenes/player.tscn" id="1_5pd0b"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_mh6w3"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_k66jw"]
 [ext_resource type="PackedScene" uid="uid://bqe0eiincuh45" path="res://scenes/rockCube.tscn" id="3_5s7eh"]
 [ext_resource type="PackedScene" uid="uid://dcxqxefx1sg5c" path="res://scenes/rockCluster.tscn" id="4_gwva3"]
+[ext_resource type="PackedScene" uid="uid://ce0yd21nepi6j" path="res://scenes/pause_menu.tscn" id="4_u5v5u"]
 [ext_resource type="PackedScene" uid="uid://kur7toytsgye" path="res://scenes/rock.tscn" id="5_hc5v8"]
 [ext_resource type="PackedScene" uid="uid://bgddo2isseyvh" path="res://scenes/rockConcentration.tscn" id="6_am2mv"]
 
@@ -13,14 +14,24 @@
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_mh6w3")
 
-[node name="Player" parent="." instance=ExtResource("1_5pd0b")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 process_callback = 0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
 script = ExtResource("2_k66jw")
+
+[node name="PauseMenu" parent="Camera2D" instance=ExtResource("4_u5v5u")]
+visible = false
+z_index = 1
+offset_left = -5.0
+offset_top = 8.0
+offset_right = -5.0
+offset_bottom = 8.0
+scale = Vector2(3, 3)
+
+[node name="Player" parent="." instance=ExtResource("1_5pd0b")]
+position = Vector2(-8, 85)
 
 [node name="Rocks" type="Node" parent="."]
 
@@ -47,7 +58,7 @@ position = Vector2(183, 402)
 position = Vector2(-484, 907)
 
 [node name="rockCube3" parent="Rocks" instance=ExtResource("3_5s7eh")]
-position = Vector2(-405, -295)
+position = Vector2(-466, -370)
 
 [node name="rock2" parent="Rocks" instance=ExtResource("5_hc5v8")]
 position = Vector2(-503, 203)
@@ -83,6 +94,6 @@ position = Vector2(-783, 320)
 position = Vector2(1397, -180)
 
 [node name="rock4" parent="Rocks" instance=ExtResource("5_hc5v8")]
-position = Vector2(0, -1)
+position = Vector2(38, -215)
 
 [connection signal="size_changed" from="Player" to="Camera2D" method="_on_player_size_changed"]

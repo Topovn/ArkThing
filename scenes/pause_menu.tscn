@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce0yd21nepi6j"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_28rn5"]
+[ext_resource type="FontFile" uid="uid://bb16tjy11poy3" path="res://Baby Doll.ttf" id="2_7bpwy"]
+[ext_resource type="Shader" path="res://assets/pause_menu.gdshader" id="2_oivjh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dclpr"]
+shader = ExtResource("2_oivjh")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_551pc"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.859]
+}
+
+[sub_resource type="Animation" id="Animation_2cbhp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tcp8j"]
+_data = {
+"RESET": SubResource("Animation_2cbhp"),
+"blur": SubResource("Animation_551pc")
+}
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_28rn5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dclpr")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -642.0
+offset_top = -358.5
+offset_right = 642.0
+offset_bottom = 358.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -49.0
+offset_right = 192.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7bpwy")
+theme_override_font_sizes/font_size = 42
+text = "Resume"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7bpwy")
+theme_override_font_sizes/font_size = 42
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tcp8j")
+}
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

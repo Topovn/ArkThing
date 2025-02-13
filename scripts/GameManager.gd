@@ -1,7 +1,7 @@
 extends Node
 
 @onready var pause_menu = $"../Camera2D/PauseMenu"
- 
+
 var paused = false
 
 # TODO
@@ -9,9 +9,12 @@ var paused = false
 # Add interact anim and call it when change size OK
 # Main Menu and Pause Menu OK 
 # Add Main Menu with mud sit anim OK
-# Add HUD with score point
+# change screen size + HUD stick to screen size OK
+# Add HUD with score point but make HUD sticks in top left OK
+# Add BGMs, main menu and gameplay OK
 # Add Tile map
-# Add BGM - Sheep
+# Add buffer for Camera2D or replace with PhantomCamera plugin?
 
-# change screen size + HUD stick to screen size 
-# https://www.youtube.com/watch?v=blPqie3Z_F0
+
+func _ready():
+	BgmManager.stop_bgm()

@@ -878,8 +878,8 @@ position = Vector2(180, 412)
 sprite_frames = SubResource("SpriteFrames_80xaj")
 autoplay = "default"
 
-[connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_spawn_mud_pressed"]
 [connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_change_skins_pressed"]
+[connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_spawn_mud_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

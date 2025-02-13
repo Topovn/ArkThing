@@ -1,13 +1,33 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhukbw0m5ksmx"]
+[gd_scene load_steps=13 format=3 uid="uid://bhukbw0m5ksmx"]
 
 [ext_resource type="PackedScene" uid="uid://c124q4akqos1w" path="res://scenes/player.tscn" id="1_5pd0b"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_mh6w3"]
+[ext_resource type="Texture2D" uid="uid://pe1arnrlxgry" path="res://assets/sprites/Mud.png" id="2_h508q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_k66jw"]
 [ext_resource type="PackedScene" uid="uid://bqe0eiincuh45" path="res://scenes/rockCube.tscn" id="3_5s7eh"]
 [ext_resource type="PackedScene" uid="uid://dcxqxefx1sg5c" path="res://scenes/rockCluster.tscn" id="4_gwva3"]
 [ext_resource type="PackedScene" uid="uid://ce0yd21nepi6j" path="res://scenes/pause_menu.tscn" id="4_u5v5u"]
 [ext_resource type="PackedScene" uid="uid://kur7toytsgye" path="res://scenes/rock.tscn" id="5_hc5v8"]
 [ext_resource type="PackedScene" uid="uid://bgddo2isseyvh" path="res://scenes/rockConcentration.tscn" id="6_am2mv"]
+[ext_resource type="AudioStream" uid="uid://c0308ywnx1fi1" path="res://assets/sounds/sheep.mp3" id="10_ncksc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyw5l"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qr1h"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Main" type="Node2D"]
 
@@ -20,15 +40,6 @@ process_callback = 0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
 script = ExtResource("2_k66jw")
-
-[node name="PauseMenu" parent="Camera2D" instance=ExtResource("4_u5v5u")]
-visible = false
-z_index = 1
-offset_left = -5.0
-offset_top = 8.0
-offset_right = -5.0
-offset_bottom = 8.0
-scale = Vector2(3, 3)
 
 [node name="Player" parent="." instance=ExtResource("1_5pd0b")]
 position = Vector2(-8, 85)
@@ -95,5 +106,98 @@ position = Vector2(1397, -180)
 
 [node name="rock4" parent="Rocks" instance=ExtResource("5_hc5v8")]
 position = Vector2(38, -215)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoBox" type="Panel" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 382.0
+offset_bottom = 162.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gyw5l")
+
+[node name="Avatar" type="Panel" parent="CanvasLayer/HUD/InfoBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -52.5
+offset_right = 123.0
+offset_bottom = 52.5
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3qr1h")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/InfoBox/Avatar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -52.0
+offset_right = 103.0
+offset_bottom = 53.0
+grow_vertical = 2
+texture = ExtResource("2_h508q")
+expand_mode = 1
+
+[node name="RockLabel" type="Label" parent="CanvasLayer/HUD/InfoBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -31.0
+offset_right = 81.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Rocks:"
+vertical_alignment = 1
+
+[node name="RockValue" type="Label" parent="CanvasLayer/HUD/InfoBox"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 65.0
+offset_top = -31.0
+offset_right = 133.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+vertical_alignment = 1
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_u5v5u")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.25, 1.25)
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ncksc")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="size_changed" from="Player" to="Camera2D" method="_on_player_size_changed"]

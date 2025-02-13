@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var player_sprite = $AnimatedSprite2D
 @onready var collision_shape = $CollisionShape2D
 @onready var player = $"."
+@onready var rock_value = %RockValue
+
 
 var SPEED: float = 300.0
 var score: int = 0 
@@ -21,6 +23,7 @@ var is_increasing_size = false
 func _ready():
 	target_scale = base_scale
 	player_sprite.connect("animation_finished", _on_AnimatedSprite2D_animation_finished)
+	rock_value.text = str(score)
 
 # 2D top down camera
 func _physics_process(_delta):
@@ -50,12 +53,12 @@ func movement():
 	# debug
 	if Input.is_action_just_pressed("add_score"):
 		add_score(25)
-	if Input.is_action_just_released("play_anim"):
-		player_sprite.play("SizeIncrease")
 
-func add_score(amount: int):
-	score += amount
-	print("Score: ", score)
+func add_score(points: int):
+	score += points
+	#print("Score: ", score)
+	rock_value.text = str(score)
+	print("Score: ", rock_value.text)
 	update_size()
 
 func update_size():

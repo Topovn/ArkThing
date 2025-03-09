@@ -10,13 +10,7 @@
 texture = ExtResource("1_qbcjr")
 modulate_color = Color(0.843137, 0.843137, 0.843137, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30uy2"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_size = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a41gw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tv80"]
 bg_color = Color(0.72549, 0.72549, 0.72549, 1)
@@ -34,7 +28,13 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a41gw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30uy2"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_08k4a"]
 atlas = ExtResource("4_fmmsv")
@@ -630,43 +630,43 @@ theme_override_constants/separation = 15
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_30uy2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a41gw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7tv80")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xfiag")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a41gw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_30uy2")
 text = "Start 1-7ing"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_30uy2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a41gw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7tv80")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xfiag")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a41gw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_30uy2")
 text = "Options"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_30uy2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a41gw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7tv80")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xfiag")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a41gw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_30uy2")
 text = "Exit"
 
 [node name="MudSit" type="AnimatedSprite2D" parent="."]

@@ -8,7 +8,7 @@ func _ready():
 	add_child(menu_bgm)
 	menu_bgm.stream = preload("res://assets/sounds/mainmenu.mp3")
 	menu_bgm.autoplay = true
-	menu_bgm.volume_db = -10
+	menu_bgm.volume_db = -30
 	menu_bgm.play()
 
 func stop_bgm():

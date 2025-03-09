@@ -13,9 +13,12 @@ var base_scale: Vector2 = Vector2.ONE
 var target_scale: Vector2 = Vector2.ONE
 var current_speed: float = SPEED
 
+var score_checkpoint_one: int = 500
+var score_checkpoint_two: int = 1000
+
 var size_increase_one = false
 var size_increase_two = false
-signal size_changed
+#signal size_changed
 
 var can_move = true
 var is_increasing_size = false
@@ -23,7 +26,7 @@ var is_increasing_size = false
 func _ready():
 	target_scale = base_scale
 	player_sprite.connect("animation_finished", _on_AnimatedSprite2D_animation_finished)
-	rock_value.text = str(score)
+	#rock_value.text = str(score)
 
 # 2D top down camera
 func _physics_process(_delta):
@@ -62,21 +65,21 @@ func add_score(points: int):
 	update_size()
 
 func update_size():
-	if score >= 200 and not size_increase_two:
+	if score >= score_checkpoint_two and not size_increase_two:
 		size_increase_two = true
-		start_size_increase(2, 700)
-	elif score >= 50 and not size_increase_one:
+		start_size_increase(2)
+	elif score >= score_checkpoint_one and not size_increase_one:
 		size_increase_one = true
-		start_size_increase(1.5, 500)
+		start_size_increase(1.5)
 
-func start_size_increase(scale_factor: float, new_speed: float):
+func start_size_increase(scale_factor: float):
 	if is_increasing_size:
 		return	
 	can_move = false
 	is_increasing_size = true
 	velocity = Vector2.ZERO
 	target_scale = base_scale * scale_factor
-	SPEED = new_speed
+	SPEED = SPEED * scale_factor
 	player_sprite.play("SizeIncrease")
 	emit_signal("size_changed", size_increase_one, size_increase_two)
 	
@@ -87,4 +90,3 @@ func _on_AnimatedSprite2D_animation_finished():
 		can_move = true
 		player_sprite.play("Idle")
 		#collision_shape.shape.size = Vector2(16,16) * target_scale
-

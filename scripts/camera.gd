@@ -7,6 +7,7 @@ var SPEED = 10
 var zoomTarget: Vector2
 
 func _ready():
+	zoom *= 0.7
 	zoomTarget = zoom
 	pass
 

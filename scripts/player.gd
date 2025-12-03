@@ -11,10 +11,10 @@ var SPEED: float = 300.0
 var score: int = 0 
 var base_scale: Vector2 = Vector2.ONE
 var target_scale: Vector2 = Vector2.ONE
-var current_speed: float = SPEED
+#var current_speed: float = SPEED
 
-var score_checkpoint_one: int = 500
-var score_checkpoint_two: int = 1000
+var score_checkpoint_one: int = 300
+var score_checkpoint_two: int = 600
 
 var size_increase_one = false
 var size_increase_two = false
@@ -22,6 +22,7 @@ var size_increase_two = false
 
 var can_move = true
 var is_increasing_size = false
+var sprint_multiplier: float = 2.0
 
 func _ready():
 	target_scale = base_scale
@@ -40,7 +41,15 @@ func movement():
 	
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
-	velocity = direction * SPEED if direction else velocity.move_toward(Vector2.ZERO, SPEED)
+	var active_speed = SPEED
+	if Input.is_action_pressed("sprint"):
+		active_speed = SPEED * sprint_multiplier
+		player_sprite.speed_scale = 1.5
+	else:
+		player_sprite.speed_scale = 1.0
+	
+	
+	velocity = direction * active_speed if direction else velocity.move_toward(Vector2.ZERO, SPEED)
 	#if direction:
 		#velocity = direction * SPEED
 	#else:
@@ -52,6 +61,7 @@ func movement():
 		player_sprite.play("Move")
 	else:
 		player_sprite.play('Idle')
+		
 
 	# debug
 	if Input.is_action_just_pressed("add_score"):
@@ -79,9 +89,10 @@ func start_size_increase(scale_factor: float):
 	is_increasing_size = true
 	velocity = Vector2.ZERO
 	target_scale = base_scale * scale_factor
+	
 	SPEED = SPEED * scale_factor
 	player_sprite.play("SizeIncrease")
-	emit_signal("size_changed", size_increase_one, size_increase_two)
+	#emit_signal("size_changed", size_increase_one, size_increase_two)
 	
 
 func _on_AnimatedSprite2D_animation_finished():

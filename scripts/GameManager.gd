@@ -13,6 +13,7 @@ var paused = false
 # Add HUD with score point but make HUD sticks in top left OK
 # Add BGMs, main menu and gameplay OK
 # Add Tile map OK
+# Sprint function OK
 
 # Add buffer for Camera2D or replace with PhantomCamera plugin?
 # https://www.youtube.com/watch?v=cIFRfqH61bU&list=PLrTq4shPLJgFul2UB0e0tr7swgtwYY4n4&index=5

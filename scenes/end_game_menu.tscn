@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://be752nxxtmlby"]
+
+[ext_resource type="Script" path="res://scenes/end_game_menu.gd" id="1_nb7rp"]
+[ext_resource type="Texture2D" uid="uid://dnnmagcsg4iet" path="res://assets/sprites/endbackground.PNG" id="1_vjuch"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wuet2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0lfw"]
+bg_color = Color(0.72549, 0.72549, 0.72549, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfqfq"]
+bg_color = Color(0.729412, 0.729412, 0.729412, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apn8t"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[node name="EndGameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nb7rp")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 718.0
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(371, 450)
+scale = Vector2(0.77161, 0.735976)
+texture = ExtResource("1_vjuch")
+
+[node name="PanelContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 450.0
+offset_right = 717.0
+offset_bottom = 553.0
+
+[node name="Back" type="Button" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wuet2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e0lfw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cfqfq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_apn8t")
+text = "Main Menu
+"

@@ -24,6 +24,9 @@ var paused = false
 
 # Add cam stick to world border
 
+# Add endgame menu + mudResult 
+# add mudGreeting when start game
+
 func _ready():
 	BgmManager.stop_bgm()
 	

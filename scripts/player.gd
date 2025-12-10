@@ -1,66 +1,86 @@
 extends CharacterBody2D
 
+# -- Config --
+@export_group("Movement Settings")
+@export var base_speed: float = 300.0
+@export var sprint_multiplier: float = 2.0
+@export var scale_lerp_speed: float = 10.0
 
-@onready var player_sprite = $AnimatedSprite2D
-@onready var collision_shape = $CollisionShape2D
-@onready var player = $"."
-@onready var rock_value = %RockValue
+@export_group("Game Progression")
+# Dictionary format: { Score_Threshold : Scale_Multiplier }
+@export var size_levels: Dictionary = {
+	300: 1.5,
+	600: 2.0,
+	900: 2.5
+}
 
+# -- NODES --
+@onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+#@onready var player = $"."
+@onready var rock_value: Label = %RockValue
 
-var SPEED: float = 300.0
-var score: int = 0 
+# -- STATE --
+var score: int = 0
 var base_scale: Vector2 = Vector2.ONE
 var target_scale: Vector2 = Vector2.ONE
-#var current_speed: float = SPEED
+var processed_levels: Array = []
+# -- CURRENT MULT --
+var can_move: bool = true
+var is_increasing_size: bool = false
+var current_size_modifier: float = 1.0
 
-var score_checkpoint_one: int = 300
-var score_checkpoint_two: int = 600
-
-var size_increase_one = false
-var size_increase_two = false
-#signal size_changed
-
-var can_move = true
-var is_increasing_size = false
-var sprint_multiplier: float = 2.0
+signal size_changed(new_scale_multiplier)
 
 func _ready():
+	base_scale = scale
 	target_scale = base_scale
-	player_sprite.connect("animation_finished", _on_AnimatedSprite2D_animation_finished)
+	player_sprite.connect("animation_finished", _on_animation_finished)
 	#rock_value.text = str(score)
 
 # 2D top down camera
 func _physics_process(_delta):
-	player.scale = player.scale.lerp(target_scale, 10 * _delta)
-	movement()
+	#player.scale = player.scale.lerp(target_scale, 10 * _delta)
+	scale = scale.lerp(target_scale, scale_lerp_speed * _delta)
+	
+	handle_movement()
 	move_and_slide()
 
-func movement():
+func handle_movement():
 	if not can_move or is_increasing_size:
 		return
 	
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
-	var active_speed = SPEED
+	# -- SPEED CALC --
+	# Formula : Base * SizeBonus * SprintBonus
+	var current_sprint_mult = 1.0
+	
 	if Input.is_action_pressed("sprint"):
-		active_speed = SPEED * sprint_multiplier
-		player_sprite.speed_scale = 1.5
+		current_sprint_mult = sprint_multiplier
+		player_sprite.speed_scale = 1.2
 	else:
 		player_sprite.speed_scale = 1.0
 	
 	
-	velocity = direction * active_speed if direction else velocity.move_toward(Vector2.ZERO, SPEED)
-	#if direction:
-		#velocity = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-		#velocity.y = move_toward(velocity.y, 0, SPEED) 
+	#velocity = direction * active_speed if direction else velocity.move_toward(Vector2.ZERO, SPEED)
+	var final_speed = base_speed * current_size_modifier * current_sprint_mult
 
+	# -- VELOCITY --
+	if direction:
+		velocity = direction * final_speed
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, final_speed)
+	
+	
+	# -- ANIMATION --
 	if direction != Vector2.ZERO:
 		player_sprite.flip_h = direction.x < 0
-		player_sprite.play("Move")
+		if player_sprite.animation != "Move":
+			player_sprite.play("Move")
 	else:
-		player_sprite.play('Idle')
+		if player_sprite.animation != "Idle":
+			player_sprite.play('Idle')
 		
 
 	# debug
@@ -72,32 +92,34 @@ func add_score(points: int):
 	#print("Score: ", score)
 	rock_value.text = str(score)
 	print("Score: ", rock_value.text)
-	update_size()
+	check_size_upgrade()
 
-func update_size():
-	if score >= score_checkpoint_two and not size_increase_two:
-		size_increase_two = true
-		start_size_increase(2)
-	elif score >= score_checkpoint_one and not size_increase_one:
-		size_increase_one = true
-		start_size_increase(1.5)
+func check_size_upgrade():
+	for threshold in size_levels.keys():
+		if score >= threshold and not threshold in processed_levels:
+			var new_scale = size_levels[threshold]
+			apply_size_increase(new_scale, threshold)
+			return
 
-func start_size_increase(scale_factor: float):
+func apply_size_increase(scale_factor: float, level_threshold: int):
 	if is_increasing_size:
 		return	
+	
+	# Lock movement
 	can_move = false
 	is_increasing_size = true
 	velocity = Vector2.ZERO
+	
+	processed_levels.append(level_threshold)
+	
+	current_size_modifier = scale_factor
 	target_scale = base_scale * scale_factor
 	
-	SPEED = SPEED * scale_factor
 	player_sprite.play("SizeIncrease")
-	#emit_signal("size_changed", size_increase_one, size_increase_two)
+	size_changed.emit(current_size_modifier)
 	
-
-func _on_AnimatedSprite2D_animation_finished():
+func _on_animation_finished():
 	if player_sprite.animation == "SizeIncrease":
 		is_increasing_size = false
 		can_move = true
-		player_sprite.play("Idle")
-		#collision_shape.shape.size = Vector2(16,16) * target_scale
+		player_sprite.play("Idle")		

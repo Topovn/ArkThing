@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/rock.gd" id="1_1pvcm"]
 [ext_resource type="Texture2D" uid="uid://cmf5ujgonm682" path="res://assets/sprites/RockConcentration.png" id="2_l3s0l"]
-[ext_resource type="AudioStream" uid="uid://jmoyelvyy1oy" path="res://assets/sounds/rock_collected.mp3" id="3_ipuhy"]
+[ext_resource type="AudioStream" uid="uid://jmoyelvyy1oy" path="res://assets/sounds/rockCollected.mp3" id="3_ipuhy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imftn"]
 size = Vector2(392, 460)

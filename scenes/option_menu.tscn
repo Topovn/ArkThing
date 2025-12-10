@@ -1,9 +1,10 @@
-[gd_scene load_steps=87 format=3 uid="uid://bmnib48xtq5p1"]
+[gd_scene load_steps=88 format=3 uid="uid://bmnib48xtq5p1"]
 
 [ext_resource type="Script" path="res://option_menu.gd" id="1_1bb8d"]
 [ext_resource type="Texture2D" uid="uid://bol4ych1cvolw" path="res://assets/sprites/mainmenu.jpg" id="2_xfpae"]
 [ext_resource type="Texture2D" uid="uid://u5amy34ex57v" path="res://assets/sprites/MudSit.png" id="3_eev7c"]
 [ext_resource type="Script" path="res://scripts/mudsitflip.gd" id="4_0pgeg"]
+[ext_resource type="Script" path="res://scenes/mud_sit.gd" id="5_oumdr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wjy27"]
 texture = ExtResource("2_xfpae")
@@ -877,9 +878,10 @@ script = ExtResource("4_0pgeg")
 position = Vector2(180, 412)
 sprite_frames = SubResource("SpriteFrames_80xaj")
 autoplay = "default"
+script = ExtResource("5_oumdr")
 
-[connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_spawn_mud_pressed"]
 [connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_change_skins_pressed"]
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_spawn_mud_pressed"]
+[connection signal="pressed" from="VBoxContainer/SpawnMud" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_exit_pressed"]

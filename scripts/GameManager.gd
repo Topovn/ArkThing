@@ -5,15 +5,9 @@ extends Node
 var paused = false
 
 # TODO
-# Change mud sizes depends on point OK
-# Add interact anim and call it when change size OK
-# Main Menu and Pause Menu OK 
-# Add Main Menu with mud sit anim OK
-# change screen size + HUD stick to screen size OK
-# Add HUD with score point but make HUD sticks in top left OK
-# Add BGMs, main menu and gameplay OK
-# Add Tile map OK
-# Sprint function OK
+# Add endgame menu + mudResult 
+# When collected all rocks -> Babydoll font text Misson Accomplished slides in from the middle left to the middle screen, then to the left while playing MissiopnAccomplished audio
+#  then transit to endScreen (end_game_menu.tscn) -> play mudResult.mp3. Lock all input and wait for the user to mouse click anywhere to go back to main menu
 
 # Add buffer for Camera2D or replace with PhantomCamera plugin?
 # https://www.youtube.com/watch?v=cIFRfqH61bU&list=PLrTq4shPLJgFul2UB0e0tr7swgtwYY4n4&index=5
@@ -24,7 +18,7 @@ var paused = false
 
 # Add cam stick to world border
 
-# Add endgame menu + mudResult 
+
 # add mudGreeting when start game
 
 func _ready():

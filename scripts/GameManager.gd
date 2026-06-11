@@ -36,6 +36,7 @@ func _process(_delta):
 	if player and player.score > 2000:
 		rocks_highlighted = true
 		_highlight_remaining_rocks()
+		_spawn_rock_arrows()
 
 # Debug: press space to jump straight to the endgame sequence.
 func _unhandled_input(event):
@@ -47,10 +48,19 @@ func _highlight_remaining_rocks():
 		var sprite = rock.get_node_or_null("Rock")
 		if sprite == null:
 			continue
+		# Permanent bright tint so they stand out against the terrain.
+		sprite.modulate = Color(1, 0.85, 0.1)
 		# Bind the tween to the rock so it auto-frees when the rock is collected.
+		var base_scale = sprite.scale
 		var pulse = rock.create_tween().set_loops()
-		pulse.tween_property(sprite, "modulate", Color(1, 0.85, 0.1), 0.4)
-		pulse.tween_property(sprite, "modulate", Color(1, 1, 1), 0.4)
+		pulse.tween_property(sprite, "scale", base_scale * 1.8, 0.4) \
+			.set_trans(Tween.TRANS_SINE)
+		pulse.tween_property(sprite, "scale", base_scale, 0.4) \
+			.set_trans(Tween.TRANS_SINE)
+
+func _spawn_rock_arrows():
+	var arrows = preload("res://scripts/RockArrows.gd").new()
+	add_child(arrows)
 
 func _setup_rock_tracking():
 	var rocks = get_tree().get_nodes_in_group("rocks")

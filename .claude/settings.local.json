@@ -3,7 +3,9 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:arknights.wiki.gg)",
-      "WebFetch(domain:arknights.fandom.com)"
+      "WebFetch(domain:arknights.fandom.com)",
+      "Bash(python -c \"import struct;f=open\\('assets/Terra map.png','rb'\\).read\\(33\\);print\\('PNG WxH:', struct.unpack\\('>II', f[16:24]\\)\\)\")",
+      "Bash(powershell -NoProfile -Command 'Add-Type -AssemblyName System.Drawing; $i=[System.Drawing.Image]::FromFile\\(\\(Resolve-Path '\\\\''assets/Terra map.png'\\\\''\\)\\); '\\\\''WxH: {0} x {1}'\\\\'' -f $i.Width, $i.Height; $i.Dispose\\(\\)')"
     ]
   }
 }

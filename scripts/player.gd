@@ -9,9 +9,9 @@ extends CharacterBody2D
 @export_group("Game Progression")
 # Dictionary format: { Score_Threshold : Scale_Multiplier }
 @export var size_levels: Dictionary = {
-	300: 1.5,
-	600: 2.0,
-	900: 2.5
+	400: 1.5,
+	800: 2.0,
+	1200: 2.5
 }
 
 # -- NODES --
@@ -48,6 +48,7 @@ func _physics_process(_delta):
 
 func handle_movement():
 	if not can_move or is_increasing_size:
+		velocity = Vector2.ZERO
 		return
 	
 	var direction = Input.get_vector("left", "right", "up", "down")

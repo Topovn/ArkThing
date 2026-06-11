@@ -83,10 +83,6 @@ func handle_movement():
 			player_sprite.play('Idle')
 		
 
-	# debug
-	if Input.is_action_just_pressed("add_score"):
-		add_score(25)
-
 func add_score(points: int):
 	score += points
 	#print("Score: ", score)

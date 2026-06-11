@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:arknights.wiki.gg)",
+      "WebFetch(domain:arknights.fandom.com)"
+    ]
+  }
+}

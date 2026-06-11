@@ -44,8 +44,8 @@ offset_right = 1279.0
 offset_bottom = 718.0
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(371, 450)
-scale = Vector2(0.77161, 0.735976)
+position = Vector2(422, 473)
+scale = Vector2(0.724788, 0.693598)
 texture = ExtResource("1_vjuch")
 
 [node name="PanelContainer" type="VBoxContainer" parent="."]

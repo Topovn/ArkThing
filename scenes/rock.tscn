@@ -120,7 +120,7 @@ shape = SubResource("RectangleShape2D_xj7j8")
 [node name="PickUpSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1, -27)
 stream = ExtResource("3_o0doo")
-volume_db = -40.0
+volume_db = -35.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

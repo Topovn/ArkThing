@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Baby Doll.ttf-466957c2a7aa89b0e50d26a7724e95a
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
